@@ -1,0 +1,11 @@
+---
+gig1: "192.5.1.1 255.255.255.0"
+gig2: "192.5.2.1 255.255.255.0"
+gig1_description: "WAN Interface"
+gig2_description: "LAN Interface"
+loopback0: "55.55.55.55 255.255.255.255"
+loopback0_description: "Source Loopback"
+ospf_network_all: "network 0.0.0.0 0.0.0.0 area 0"
+ospf_network_update_source: "router-id 55.55.55.55"
+router_id: "55.55.55.55"
+bgp_neighbor_1: "192.5.1.2"

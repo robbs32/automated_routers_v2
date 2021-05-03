@@ -1,0 +1,81 @@
+---
+- name: Configure Managed Routers
+  hosts: routers
+  connection: network_cli
+   
+  tasks:
+    - name: Create host_vars from CSV
+      command: "python3 scripts/csv2hosts.py"
+     
+    - pause:
+        prompt: "*** CREATING HOST VARS FILES ***"
+        seconds: 2
+
+    - debug: 
+        msg: "{{hostvars[inventory_hostname]['hostname']}}"
+
+    - name: Configure IP on Gig1 and Gig2
+      cisco.ios.ios_l3_interfaces:
+        config:
+        - name: GigabitEthernet1
+          ipv4:
+          - address: "{{hostvars[inventory_hostname]['gig1']}}" 
+        - name: GigabitEthernet2
+          ipv4:
+          - address: "{{hostvars[inventory_hostname]['gig2']}}"
+   
+    - name: Configure Loopback0
+      cisco.ios.ios_interfaces:
+        config:
+        - name: loopback0
+          enabled: true
+
+    - pause: 
+        prompt: Allow Loopback0 to be created
+        seconds: 60
+       
+    - name: Configure IP on Loopback0
+      cisco.ios.ios_l3_interfaces:
+        config:
+        - name: loopback0 
+          ipv4:
+          - address: "{{hostvars[inventory_hostname]['loopback0']}}"
+
+    - name: Bring up and Configure description on Gig1, Gig2 and Loopback0
+      cisco.ios.ios_interfaces:
+        config:
+        - name: GigabitEthernet1
+          description: "{{hostvars[inventory_hostname]['gig1_description']}}"
+          enabled: true
+        - name: GigabitEthernet2
+          description: "{{hostvars[inventory_hostname]['gig2_description']}}"
+          enabled: true
+        - name: Loopback0
+          description: "{{hostvars[inventory_hostname]['loopback0_description']}}"
+          enabled: true
+
+    - name: Configure OSPF on the LAN Interface GigabitEthernet1
+      ios_config:
+        lines:
+         - "{{hostvars[inventory_hostname]['ospf_network_all']}}"
+         - "{{hostvars[inventory_hostname]['ospf_network_update_source']}}"
+        parents: router ospf 1
+  
+    - name: Configure BGP on the WAN Interface GigabitEthernet1
+      cisco.ios.ios_bgp:
+        config:
+          bgp_as: 65001
+          router_id: "{{hostvars[inventory_hostname]['router_id']}}"
+          log_neighbor_changes: true
+          neighbors:
+          - neighbor: "{{hostvars[inventory_hostname]['bgp_neighbor_1']}}"        
+            remote_as: 65000
+          networks:
+          - prefix: "{{hostvars[inventory_hostname]['router_id']}}"
+            masklen: 32
+          address_family:
+          - afi: ipv4
+            safi: unicast
+        operation: merge
+
+

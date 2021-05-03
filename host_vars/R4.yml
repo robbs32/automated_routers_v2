@@ -1,0 +1,12 @@
+---
+bgp_neighbor_1: 192.1.1.2
+gig1: 192.4.1.1 255.255.255.0
+gig1_description: WAN Interface
+gig2: 192.4.2.1 255.255.255.0
+gig2_description: LAN Interface
+hostname: R4
+loopback0: 44.44.44.44 255.255.255.255
+loopback0_description: Source Loopback
+ospf_network_all: network 0.0.0.0 0.0.0.0 area 0
+ospf_network_update_source: router-id 44.44.44.44
+router_id: 44.44.44.44
