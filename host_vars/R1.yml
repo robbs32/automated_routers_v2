@@ -1,7 +1,7 @@
 ---
 bgp_neighbor_1: 192.1.1.2
-gig1: 192.1.1.1 255.255.255.0
-gig1_description: WAN Interface
+gig1: ''
+gig1_description: ''
 gig2: 192.1.2.1 255.255.255.0
 gig2_description: LAN Interface
 hostname: R1

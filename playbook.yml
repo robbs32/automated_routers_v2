@@ -9,7 +9,7 @@
      
     - pause:
         prompt: "*** CREATING HOST VARS FILES ***"
-        seconds: 2
+        seconds: 5
 
     - debug: 
         msg: "{{hostvars[inventory_hostname]['hostname']}}"

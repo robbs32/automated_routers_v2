@@ -1,5 +1,5 @@
 hostname,gig1,gig2,gig1_description,gig2_description,loopback0,loopback0_description,ospf_network_all,ospf_network_update_source,router_id,bgp_neighbor_1
-R1,192.1.1.1 255.255.255.0,192.1.2.1 255.255.255.0,WAN Interface,LAN Interface,11.11.11.11 255.255.255.255,Source Loopback,network 0.0.0.0 0.0.0.0 area 0,router-id 11.11.11.11,11.11.11.11,192.1.1.2
+R1,,192.1.2.1 255.255.255.0,,LAN Interface,11.11.11.11 255.255.255.255,Source Loopback,network 0.0.0.0 0.0.0.0 area 0,router-id 11.11.11.11,11.11.11.11,192.1.1.2
 R2,192.2.1.1 255.255.255.0,192.2.2.1 255.255.255.0,WAN Interface,LAN Interface,22.22.22.22 255.255.255.255,Source Loopback,network 0.0.0.0 0.0.0.0 area 0,router-id 22.22.22.22,22.22.22.22,192.1.1.2
 R3,192.3.1.1 255.255.255.0,192.3.2.1 255.255.255.0,WAN Interface,LAN Interface,33.33.33.33 255.255.255.255,Source Loopback,network 0.0.0.0 0.0.0.0 area 0,router-id 33.33.33.33,33.33.33.33,192.1.1.2
 R4,192.4.1.1 255.255.255.0,192.4.2.1 255.255.255.0,WAN Interface,LAN Interface,44.44.44.44 255.255.255.255,Source Loopback,network 0.0.0.0 0.0.0.0 area 0,router-id 44.44.44.44,44.44.44.44,192.1.1.2
